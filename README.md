@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# Rick and Morty Characters
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application that fetches and displays characters from the [Rick and Morty API](https://rickandmortyapi.com/) with search, filtering, and pagination.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Browse all Rick and Morty characters with name, image, and status
+- Search characters by name with debounced input
+- Filter by status (Alive, Dead)
+- Paginated results with page number navigation
+- Light/dark mode toggle with localStorage persistence
+- Skeleton loading state
+- Responsive grid layout
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** with TypeScript
+- **Vite** for dev server and bundling
+- **Tailwind CSS v4** for styling
+- **TanStack React Query** for data fetching and caching
+- **Axios** for HTTP requests
+- **Prettier** with Tailwind CSS plugin for formatting
+- **ESLint** for linting
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+  api/                  # API hooks (React Query)
+  assets/               # SVGs, images
+  components/           # Shared components (Header, Pagination)
+  hooks/                # Shared hooks (useDebounce, useTheme)
+  pages/
+    Characters/
+      components/       # Character, CharacterList, CharacterSkeleton
+      hooks/            # useCharacters (page-level state)
+      Characters.tsx    # Page component
+  services/             # API service functions
+  utils/                # Utility functions
+  types.ts              # Shared TypeScript types
+  App.tsx
+  main.tsx
+  index.css
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Install dependencies
+npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start dev server
+npm run dev
 ```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Environment Variables
+
+Create a `.env` file in the project root:
+
+```
+VITE_API_BASE_URL=https://rickandmortyapi.com/api
+```
+
+## Scripts
+
+| Command            | Description                  |
+| ------------------ | ---------------------------- |
+| `npm run dev`      | Start dev server             |
+| `npm run build`    | Type-check and build         |
+| `npm run format`   | Format code with Prettier    |
+| `npm run lint`     | Lint with ESLint             |
+| `npm run preview`  | Preview production build     |
