@@ -65,10 +65,10 @@ VITE_API_BASE_URL=https://rickandmortyapi.com/api
 
 ## Scripts
 
-| Command            | Description                  |
-| ------------------ | ---------------------------- |
-| `npm run dev`      | Start dev server             |
-| `npm run build`    | Type-check and build         |
-| `npm run format`   | Format code with Prettier    |
-| `npm run lint`     | Lint with ESLint             |
-| `npm run preview`  | Preview production build     |
+| Command           | Description               |
+| ----------------- | ------------------------- |
+| `npm run dev`     | Start dev server          |
+| `npm run build`   | Type-check and build      |
+| `npm run format`  | Format code with Prettier |
+| `npm run lint`    | Lint with ESLint          |
+| `npm run preview` | Preview production build  |
