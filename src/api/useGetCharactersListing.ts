@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import type { ApiResponse, Character, StatusFilter } from "../types";
 
 interface UseCharactersResult {
@@ -36,15 +36,14 @@ export const useGetCharactersListing = (
     name: string,
     status: StatusFilter,
 ): UseCharactersResult => {
-    const { data, isFetching, isError, error } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey: ["characters", { page, name, status }],
         queryFn: () => fetchCharacters({ page, name, status }),
-        placeholderData: keepPreviousData,
     });
 
     return {
         characters: data?.results ?? [],
-        loading: !data && isFetching,
+        loading: isLoading,
         error: isError
             ? error instanceof Error
                 ? error.message
